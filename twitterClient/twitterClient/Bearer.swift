@@ -27,7 +27,6 @@ class Bearer {
             } else if let d = data {
                 do{
                     if let dic : NSDictionary = try JSONSerialization.jsonObject(with: d, options: []) as? NSDictionary{
-                        print(dic)
                         self.retrieveToken(myDic :dic)
                     }
                 }
@@ -41,5 +40,6 @@ class Bearer {
     
     func retrieveToken(myDic: NSDictionary){
         Singleton.accessToken = myDic.value(forKey: "access_token") as! String
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "goFetchTweet"), object: nil)
     }
 }
